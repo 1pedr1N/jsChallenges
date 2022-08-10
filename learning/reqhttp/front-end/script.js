@@ -16,23 +16,44 @@ function solution1() {
     });
   });
 }
-solution1();
+//solution1();
 
 function fetchJson(url) {
   fetch(url).then((r) => {
     return r.json();
   });
 }
+
 function solution2() {
   //first req
-  fetchJson("http://localhost:3000/employees").then((employees) => {
-    fetchJson("http://localhost:3000/roles").then((i) => {
-      let table = renderTable(employees, i);
-      document.getElementById("app").innerHTML = table;
+  fetchJson("http://localhost:3000/employees")
+    .then((employees) => {
+      fetchJson("http://localhost:3000/roles")
+        .then((i) => {
+          let table = renderTable(employees, i);
+          document.getElementById("app").innerHTML = table;
+        })
+        .catch((e) => {
+          showError();
+        });
+    })
+    .catch((err) => {
+      showError();
     });
-  });
 }
-solution2();
+//solution2();
+
+async function solution3() {
+  try {
+    let i = await fetchJson("http://localhost:3000/roles");
+    let employees = await fetchJson("http://localhost:3000/employees");
+    let table = renderTable(employees, i);
+    document.getElementById("app").innerHTML = table;
+  } catch (e) {
+    showError(e);
+  }
+}
+solution3();
 function renderTable(employees, roles) {
   let rows = employees.map((item) => {
     let role = roles.find((role) => role.id == item.role_id);
@@ -42,4 +63,8 @@ function renderTable(employees, roles) {
     </tr>`;
   });
   return `<table>  ${rows.join("")} </table> `;
+}
+
+function showError() {
+  document.getElementById("app").innerHTML = "Erro";
 }
