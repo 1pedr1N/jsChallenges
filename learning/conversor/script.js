@@ -50,3 +50,47 @@ function ganhoPorHoraBRL(salario, horas) {
     currency: "BRL",
   });
 }
+
+function multiVar() {
+  var a = 2;
+  var b = 3;
+  return a * b;
+}
+function multiLet() {
+  let a = 2;
+  let b = 3;
+  return a * b;
+}
+const materials = ["Hydrogen", "Helium", "Lithium", "Beryllium"];
+console.log(materials.map((material) => material.length));
+console.log(materials.find((material) => material.charAt(0)));
+
+function maiorDeIdade(idade) {
+  if (idade >= 18) {
+    return alert("Maior de idade");
+  } else {
+    return alert("Menor de idade");
+  }
+}
+
+function maiorDeIdade2(idade) {
+  return idade >= 18 ? alert("Maior de idade") : alert("Menor de idade");
+}
+
+function Promise(callback) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(callback);
+    }),
+      1000;
+  });
+}
+function maiorDeIdadeEUA(idade) {
+  return idade >= 21 ? alert("Maior de idade") : alert("Menor de idade");
+}
+function gastoMes(gastoDia) {
+  return gastoDia * 30;
+}
+function gastoDia(gastoMes) {
+  return gastoMes / 30;
+}
